@@ -10,7 +10,7 @@ aircraft_def;
 
 iter_max=20;
 iter_min=5;
-erro_max=5;
+erro_max=0.5;
 erro=1000;
 
 Wo_data=[aircraft.gen.Wo];
@@ -31,15 +31,23 @@ for iter=1:iter_max
     aircraft.aero.Vtail.Cr=dim.Vtail.Cr; %m
     aircraft.aero.Vtail.Ct=dim.Vtail.Ct; %m
     aircraft.aero.Vtail.MAC=dim.Vtail.MAC; %m
-   
     
+    V=aircraft.aero.Vcruz/1.94384;
+    h=aircraft.gen.hcruz*0.3048;
+    [CD,CL]=aerodynamics(aircraft,V,h);
+    aircraft.aero.CD=CD;
+    aircraft.aero.CL=CL;
+    aircraft.weights.Wf=det_perf(aircraft,CD,CL);
     [weights] = det_weight(aircraft);
     aircraft.weights=weights;
-    
+    aircraft.gen.fuelRate=aircraft.weights.Wf/aircraft.weights.Wo;
     
     erro=abs(aircraft.gen.Wo-weights.Wo);
     
     aircraft.gen.Wo=weights.Wo;
+    
+    
+    
     Wo_data=[Wo_data aircraft.gen.Wo];
     if iter == iter_max || (erro < erro_max && iter >= iter_min)
         break
@@ -55,6 +63,8 @@ end
     xlabel('Iterações')
     ylabel('Peso Total [lbf]')
     title('Convergência de Peso')
+    
+    plot_perf_drag
     
     
     

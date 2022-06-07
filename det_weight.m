@@ -2,28 +2,28 @@ function[weights] = det_weight(aircraft)
 %% Wing
 S=aircraft.aero.wing.S*10.7639; %ft2
 MAC=aircraft.aero.wing.MAC/0.3048; %ft
-tc_max=0.12;
+tc_max=aircraft.aero.wing.prof.tc_max;
 rho_mat=aircraft.gen.rho_mat; %lb/ft3
-Kp=0.0016;
+Kp=0.0016; %Fator de Densidade da Asa ??
 AR=aircraft.aero.wing.AR;
-n_ult=6;
-Enfl=0;
+n_ult=6; %Fator de Carga Final ??
+Enfl=aircraft.aero.wing.Enfl;
 taper=aircraft.aero.wing.taper;
 
-weights.wing=S*MAC*tc_max*rho_mat*Kp*(AR*n_ult/cos(Enfl))^0.6*taper^0.04;
+weights.wing=S*MAC*tc_max*rho_mat*Kp*(AR*n_ult/cosd(Enfl))^0.6*taper^0.04;
 
 %% Fuselage
 Lf=aircraft.gen.Lf;
 Dfmax=aircraft.gen.Dfmax;
 Kpf=0.0025;
 n_ult=6;
-Kinlet=1.25;
+Kinlet=1.25; %1.25 p/ entradas na Fus e 1 cc
 
 weights.fuselage=Lf*Dfmax^2*rho_mat*Kpf*n_ult^0.25*Kinlet;
 %% Horizontal Tail
 Sht=aircraft.aero.Htail.S*10.7639;
 MACht=aircraft.aero.Htail.MAC/0.3048;
-tc_maxht=0.12;
+tc_maxht=aircraft.aero.Htail.prof.tc_max;
 Kpht=0.025;
 ARht=aircraft.aero.Htail.AR;
 Enflht=0;
@@ -36,7 +36,7 @@ weights.Htail=Sht*MACht*tc_maxht*rho_mat*Kpht*(ARht/(cos(Enflht)))^0.6*lambht^0.
 %% Vertical Tail
 Svt=aircraft.aero.Vtail.S*10.7639;
 MACvt=aircraft.aero.Vtail.MAC/0.3048;
-tc_maxvt=0.12;
+tc_maxvt=aircraft.aero.Vtail.prof.tc_max;
 Kpvt=0.0715;
 ARvt=aircraft.aero.Vtail.AR;
 Enflvt=0;
@@ -77,7 +77,7 @@ weights.misc=54;
 
 %% Total
 weights.We=weights.fuselage+weights.Htail+weights.LandingGear+weights.motor_ins+weights.systems+weights.Vtail+weights.wing+weights.misc;
-weights.Wf=weights.We*aircraft.gen.fuelRate;
+weights.Wf=aircraft.weights.Wf;
 weights.Wo=weights.We+weights.Wf+aircraft.gen.payload;
 
 

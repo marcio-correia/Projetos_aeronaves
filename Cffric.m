@@ -1,5 +1,6 @@
-function[R,Rcorte,Cf]=Cffric(aircraft,Lref,V)
-        [~, a, ~, rho] = atmosisa( aircraft.gen.altitude*0.3048 );
+function[R,Rcorte,Cf]=Cffric(aircraft,Lref,V,h)
+        [~, a, ~, rho] = atmosisa( h );
+        [rho,a,T,P,nu,z,sigma] = atmos(h);
         mu=1.139e-6;
         M=V/a;
         R=rho*V*Lref/mu;

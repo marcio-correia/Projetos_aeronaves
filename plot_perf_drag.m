@@ -26,7 +26,7 @@ if plot_sense == 'y'
 
     figure
     for h=0:2000*0.3048:14000*0.3048
-        [~, ~, ~, rho] = atmosisa( h );
+        [rho,~,~,~,~,~,~] = atmos( h );
         CDt=[];
         CDi=[];
         CD0=[];

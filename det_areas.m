@@ -4,7 +4,7 @@ function [dim] = det_areas(aircraft)
 Vs=aircraft.aero.Vstall/1.94384;
 We=aircraft.gen.Wo*0.4546*9.81*0.97;
 lamb=aircraft.aero.wing.taper;
-[~, ~, ~, rho] = atmosisa( aircraft.gen.altitude*0.3048 );
+[rho,~,~,~,~,~,~] = atmos( aircraft.gen.altitude*0.3048 );
 
 dim.wing.S= We*aircraft.aero.fact_cor/(0.5*rho*Vs^2*aircraft.aero.CLmax_flap);
 dim.wing.b=sqrt(aircraft.aero.wing.AR*dim.wing.S);

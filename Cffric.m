@@ -1,6 +1,5 @@
 function[R,Rcorte,Cf]=Cffric(aircraft,Lref,V,h)
-        [~, a, ~, rho] = atmosisa( h );
-        [rho,a,T,P,nu,z,sigma] = atmos(h);
+        [rho,a,~,~,~,~,~] = atmos(h);
         mu=1.139e-6;
         M=V/a;
         R=rho*V*Lref/mu;

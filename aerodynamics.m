@@ -1,7 +1,7 @@
 function[CD,CL]=aerodynamics(aircraft,V,h)
 
 Sref=aircraft.aero.wing.S;
-[~, a, ~, rho] = atmosisa( h );
+[rho,a,~,~,~,~,~] = atmos( h );
 M=V/a;
 % beta=sqrt(1-M^2);
 

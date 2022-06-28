@@ -6,7 +6,7 @@ Kto=1.2;
 alpha=1;
 Sg=400;
 g=9.81;
-[~,~,~,rho]=atmosisa(0);
+[rho,~,~,~,~,~,~] = atmos(0);
 CLmax=aircraft.aero.CLmax_flap;
 
 TWdec=beta^2*Kto^2/(alpha*Sg*g*rho*CLmax)*WS;
@@ -17,7 +17,7 @@ hold on
 %% Climb
 beta=0.97*0.985;
 V=1.3*aircraft.aero.Vstall;
-[~,~,~,rho]=atmosisa(0);
+[rho,~,~,~,~,~,~] = atmos(0);
 [CD,CL]=aerodynamics(aircraft,V,0);
 alpha=0.8;
 CD0=CD.total-CD.induced;
@@ -34,7 +34,7 @@ plot(WS,TWCli,'LineWidth',1)
 beta=(1-aircraft.gen.fuelRate)/0.995;
 alpha=0.42;
 V=aircraft.aero.Vcruz;
-[~,~,~,rho]=atmosisa(aircraft.gen.hcruz);
+[rho,~,~,~,~,~,~] = atmos(aircraft.gen.hcruz);
 q=0.5*rho*V^2;
 CD0=aircraft.aero.CD.total-aircraft.aero.CD.induced;
 k1=aircraft.aero.CD.induced/(aircraft.aero.CL^2);
@@ -46,7 +46,7 @@ beta=1-aircraft.gen.fuelRate;
 mu=0.3;
 Kto=1.3;
 g=9.81;
-[~,~,~,rho]=atmosisa(0);
+[rho,~,~,~,~,~,~] = atmos(0);
 CLmax=aircraft.aero.CLmax_flap;
 
 TWpos=beta*Kto^2/(mu*g*rho*CLmax)*100;

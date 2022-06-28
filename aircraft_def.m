@@ -11,7 +11,8 @@ aircraft.gen.LGHeight=2.625; %ft
 aircraft.gen.payload=400; %lb
 aircraft.gen.rho_mat=169.2422; %lb/ft3
 aircraft.gen.range=661.16; %nm
-aircraft.gen.hcruz=0.85*17500; %ft
+% aircraft.gen.hcruz=0.85*17500; %ft
+aircraft.gen.hcruz=14000; %ft
 
 % aircraft.gen.mu=
 
@@ -19,15 +20,15 @@ aircraft.gen.hcruz=0.85*17500; %ft
 %% Aerodynamics
 %General
 aircraft.aero.fact_cor=0.8225;
-aircraft.aero.Vstall=51.57; %knots
+% aircraft.aero.Vstall=51.57; %knots
+aircraft.aero.Vstall=63.95; %knots
 aircraft.aero.Vcruz=134.1; %knots
 aircraft.aero.Vmax=160.9; %knots
-aircraft.aero.CLmax=1.39;
 aircraft.aero.CLmax_flap=2.1;
 
 
 %Wing
-aircraft.aero.wing.AR=12; %7.37
+aircraft.aero.wing.AR=7.37; %7.37
 aircraft.aero.wing.taper=0.5;
 aircraft.aero.wing.S=0; %m2
 aircraft.aero.wing.b=0; %m
@@ -68,6 +69,7 @@ aircraft.aero.Vtail.prof.xc_max=0.23;
 aircraft.prop.MotorWeight=446; %lb
 aircraft.prop.FuelDensity=43.9; %lb/ft3
 aircraft.prop.BladeEf=0.667;
+aircraft.prop.Pot=315; %hp
 
 %% Mission
 % aircraft.mission= ;

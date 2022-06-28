@@ -5,7 +5,6 @@ function[R,Rcorte,Cf]=Cffric(aircraft,Lref,V,h)
         M=V/a;
         R=rho*V*Lref/mu;
         k=0.405e-5;
-        
         Rcorte=38.21*(Lref/k)^1.053;
         if R>=Rcorte
             Cf=0.455/((log10(R))^2.58*(1+0.144*M^2)^0.65);

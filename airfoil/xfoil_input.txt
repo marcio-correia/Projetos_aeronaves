@@ -1,9 +1,19 @@
-NACA 2412
+load airfoil.dat
+PANE
 PPAR
-N 35
+N 101
 
 
-PSAV Save_Airfoil.txt
 OPER
-Alfa 30
+iter 250
+visc 1e6
+Mach 0.1
+seqp
+pacc
+PolarPlot
+PolarDump
+aseq
+-5
+25
+1
 CPWR Save_Cp.txt

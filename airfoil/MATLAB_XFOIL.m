@@ -11,7 +11,16 @@ clc;
 
 NACA       = '2412';                                                        % NACA 4-digit airfoil [str]
 AoA        = '0';                                                           % Angle of attack [deg]
-numNodes   = '35';                                                          % Panel nodes [#]
+numNodes   = '101';                                                         % Panel nodes [#]
+it_max     = '250';
+Re         = '1e6';
+M          = '0.1';
+Alpha_min  = '-5';
+Alpha_max  = '25';
+Alpha_inc  = '1';
+
+
+
 saveFlnmAF = 'Save_Airfoil.txt';                                            % Airfoil coordinates filename
 saveFlnmCp = 'Save_Cp.txt';                                                 % Pressure coefficient filename
 
@@ -25,17 +34,28 @@ end
 
 % Create the airfoil
 fid = fopen('xfoil_input.txt','w');
-fprintf(fid,['NACA ' NACA '\n']);
+fprintf(fid,'load airfoil.dat\n');
+fprintf(fid,'PANE\n');
 fprintf(fid,'PPAR\n');
 fprintf(fid,['N ' numNodes '\n']);
 fprintf(fid,'\n\n');
 
 % Save the airfoil data points
-fprintf(fid,['PSAV ' saveFlnmAF '\n']);
+% fprintf(fid,['PSAV ' saveFlnmAF '\n']);
 
 % Find the Cp vs. X plot
 fprintf(fid,'OPER\n');
-fprintf(fid,['Alfa ' AoA '\n']);
+fprintf(fid,['iter ' it_max '\n']);
+fprintf(fid,['visc ' Re '\n']);
+fprintf(fid,['Mach ' M '\n']);
+fprintf(fid,'seqp\n');
+fprintf(fid,'pacc\n');
+fprintf(fid,'PolarPlot\n');
+fprintf(fid,'PolarDump\n');
+fprintf(fid,'aseq\n');
+fprintf(fid,[Alpha_min '\n']);
+fprintf(fid,[Alpha_max '\n']);
+fprintf(fid,[Alpha_inc '\n']);
 fprintf(fid,['CPWR ' saveFlnmCp]);
 
 % Close file

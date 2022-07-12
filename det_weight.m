@@ -74,6 +74,8 @@ weights.systems=Kfs*(Wfuel/rho_f)^n_fs;
 %% Misc
 weights.misc=54;
 
+%% Passenger
+weights.passenger = aircraft.gen.payload/2; %lbf (peso de 1 passageiro e sua bagagem)
 
 %% Total
 weights.We=weights.fuselage+weights.Htail+weights.LandingGear+weights.motor_ins+weights.systems+weights.Vtail+weights.wing+weights.misc;

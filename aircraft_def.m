@@ -8,7 +8,7 @@ aircraft.gen.Lf=25.32765; %ft
 aircraft.gen.Dfmax=5.249; %ft
 aircraft.gen.fuelRate=0.197; %wf/wo
 aircraft.gen.LGHeight=2.625; %ft
-aircraft.gen.payload=400; %lb
+aircraft.gen.payload=400; %lb (2 passageiros (340 lbf) + bagagens (60 lbf))
 aircraft.gen.rho_mat=169.2422; %lb/ft3
 aircraft.gen.range=661.16; %nm
 % aircraft.gen.hcruz=0.85*17500; %ft
@@ -73,6 +73,19 @@ aircraft.prop.BladeEf=0.667;
 aircraft.prop.Pot=315; %hp
 aircraft.prop.RPM = 2700; 
 % aircraft.prop.MaxT=aircraft.prop.Pot*745.7/(aircraft.aero.Vmax*0.514); %N
+
+
+%% Position
+aircraft.pos.wing = 11; %ft
+aircraft.pos.fuselage = 13; %ft
+aircraft.pos.Htail = 23; %ft
+aircraft.pos.Vtail = 23; %ft
+aircraft.pos.LandingGear = 9; %ft
+aircraft.pos.motor_ins = 1; %ft
+aircraft.pos.systems = 10; %ft
+aircraft.pos.misc = 10; %ft
+aircraft.pos.Wf = 11; %ft fuel
+aircraft.pos.passenger = 11; %ft
 
 %% Mission
 % aircraft.mission= ;

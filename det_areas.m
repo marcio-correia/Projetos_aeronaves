@@ -2,7 +2,7 @@ function [dim] = det_areas(aircraft)
 %% Wing
 
 Vs=aircraft.aero.Vstall/1.94384;
-We=aircraft.gen.Wo*0.4546*9.81*0.97;
+We=aircraft.gen.Wo*0.4546*9.81;
 lamb=aircraft.aero.wing.taper;
 [rho,~,~,~,~,~,~] = atmos( aircraft.gen.altitude*0.3048 );
 

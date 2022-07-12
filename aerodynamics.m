@@ -1,4 +1,4 @@
-function[CD,CL]=aerodynamics(aircraft,V,h)
+function[CD,CL]=aerodynamics(aircraft,V,h,w)
 
 Sref=aircraft.aero.wing.S;
 [rho,a,~,~,~,~,~] = atmos( h );
@@ -86,8 +86,15 @@ CD.misc=0; %VERIFICAR!!
 %% Induced Drag
 EnfLE=atan((aircraft.aero.wing.Cr+aircraft.aero.wing.Ct)/aircraft.aero.wing.b);
 e=4.61*(1-0.045*aircraft.aero.wing.AR^0.68)*(cos(EnfLE))^0.15-3.1;
-CL=aircraft.gen.Wo*0.453592*9.81/(0.5*rho*V^2*Sref);
+CL=w*9.81/(0.5*rho*V^2*Sref);
 CD.induced=CL^2/(pi*e*aircraft.aero.wing.AR);
+
+if CL > aircraft.aero.CLmax_flap
+    CL
+    V
+    h  
+%     return
+end
 
 %% Total
 CD.total=CD.wing+CD.fus+CD.Htail+CD.Vtail+CD.induced+CD.misc;

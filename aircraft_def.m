@@ -2,7 +2,7 @@
 
 %% General
 aircraft.gen.Wo=2805.8; %lb
-aircraft.gen.altitude=0; %ft
+aircraft.gen.altitude=0; %ft - DECOLAGEM
 aircraft.gen.mu=1.5e-6;
 aircraft.gen.Lf=25.32765; %ft
 aircraft.gen.Dfmax=5.249; %ft
@@ -13,6 +13,7 @@ aircraft.gen.rho_mat=169.2422; %lb/ft3
 aircraft.gen.range=661.16; %nm
 % aircraft.gen.hcruz=0.85*17500; %ft
 aircraft.gen.hcruz=14000; %ft
+aircraft.gen.razsub=9.15; %m/s
 
 % aircraft.gen.mu=
 
@@ -70,6 +71,8 @@ aircraft.prop.MotorWeight=446; %lb
 aircraft.prop.FuelDensity=43.9; %lb/ft3
 aircraft.prop.BladeEf=0.667;
 aircraft.prop.Pot=315; %hp
+aircraft.prop.RPM = 2700; 
+% aircraft.prop.MaxT=aircraft.prop.Pot*745.7/(aircraft.aero.Vmax*0.514); %N
 
 %% Mission
 % aircraft.mission= ;

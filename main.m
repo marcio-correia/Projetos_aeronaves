@@ -1,12 +1,14 @@
 close all
 clear
+addpath('desempenho')
+addpath('airfoil')
 
 %% Inputs
 %Sensibility
 Sense = 'n' ; 
-min_var = 0.85*134.1;
-max_var = 1.5*134.1;
-inc_var = 0.05*134.1;
+min_var = 0;
+max_var = 2000;
+inc_var = 50;
 
 
 %Inputs Definition
@@ -20,16 +22,15 @@ else
     Imax=1;
 end
 %% Definição de Peso
-
 for i=1:Imax
     if Sense == 'y'
        aircraft_def;
-       aircraft.aero.Vcruz = Var(i);
+       aircraft.gen.range = Var(i);
     end
     
 iter_max=20;
 iter_min=5;
-erro_max=0.5;
+erro_max=0.05;
 erro=1000;
 
 Wo_data=[aircraft.gen.Wo];
@@ -51,12 +52,8 @@ for iter=1:iter_max
     aircraft.aero.Vtail.Ct=dim.Vtail.Ct; %m
     aircraft.aero.Vtail.MAC=dim.Vtail.MAC; %m
     
-    V=aircraft.aero.Vcruz/1.94384;
-    h=aircraft.gen.hcruz*0.3048;
-    [CD,CL]=aerodynamics(aircraft,V,h);
-    aircraft.aero.CD=CD;
-    aircraft.aero.CL=CL;
-    aircraft.weights.Wf=det_cruz(aircraft,CD,CL);
+    [aircraft.weights.Wf,v]=det_cruz(aircraft);
+    aircraft.aero.Vcruz=v/1.68781; %knots
     [weights] = det_weight(aircraft);
     aircraft.weights=weights;
     aircraft.gen.fuelRate=aircraft.weights.Wf/aircraft.weights.Wo;
@@ -85,14 +82,14 @@ end
         plot_perf_drag
         constrains
     elseif Sense == 'y'
-        Weight_Data=[Weight_Data aircraft.gen.Wo];
+        Weight_Data=[Weight_Data aircraft.weights.Wf];
     end
 end   
 
 if Sense == 'y'
-    plot(Var,Weight_Data,'LineWidth',1)
+    plot(Weight_Data,Var,'LineWidth',1)
     grid minor
     title('Análise de Sensibilidade')
-    xlabel('Velocidade Cruzeiro [knots]')
-    ylabel('Peso Total [lbf]')
+    xlabel('Peso de Combustível [lbf]')
+    ylabel('Alcance [Milhas Náuticas]')
 end
